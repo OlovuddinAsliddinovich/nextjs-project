@@ -1,15 +1,12 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { Hero } from "src/components";
 import Layout from "src/layout/layout";
 
 const IndexPage = () => {
   return (
     <Layout>
-      <div>
-        <Button variant="outlined" sx={{ color: "red" }}>
-          Click
-        </Button>
-      </div>
+      <Hero />
     </Layout>
   );
 };
