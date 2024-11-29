@@ -58,7 +58,7 @@ const Hero = () => {
 
 export default Hero;
 
-const data = [
+export const data = [
   {
     image: "https://media.graphassets.com/MxJZhmooRRuudoErkQ38",
     title: "Technical SEO with Hygraph",
