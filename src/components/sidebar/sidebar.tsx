@@ -7,7 +7,7 @@ import { format } from "date-fns";
 
 const Sidebar = () => {
   return (
-    <Box width={"30%"} height={"100vh"}>
+    <Box width={{ xs: "100%", md: "30%" }}>
       <Box position={"sticky"} top={"100px"} sx={{ transition: "all 0.3s ease" }}>
         <Box padding={"20px"} border={"1px solid gray"} borderRadius={"5px"} boxShadow={"0px 0px 10px 0px rgba(2,25,255,0.75)"} mt={"20px"}>
           <Typography variant="h5">Latest Blog</Typography>
