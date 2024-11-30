@@ -3,8 +3,9 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { HeroProps } from "./hero.props";
 
-const Hero = () => {
+const Hero = ({ blogs }: HeroProps) => {
   return (
     <Box width={"100%"} height={"70vh"} sx={{ backgroundColor: "#141414" }}>
       <Carousel
@@ -15,10 +16,10 @@ const Hero = () => {
           },
         }}
       >
-        {data.map((item) => (
-          <Box key={item.image}>
+        {blogs.map((item) => (
+          <Box key={item.id}>
             <Box sx={{ position: "relative", width: "100%", height: "70vh" }}>
-              <Image src={item.image} alt={item.title} fill style={{ objectFit: "cover" }} priority={true} />
+              <Image src={item.image.url} alt={item.title} fill style={{ objectFit: "cover" }} priority={true} />
               <Box
                 sx={{
                   position: "absolute",
@@ -38,12 +39,12 @@ const Hero = () => {
                   sx={{ top: "50%", transform: "translateY(-50%)", paddingLeft: { xs: "10px", md: "50px" } }}
                 >
                   <Typography sx={{ fontSize: { xs: "30px", md: "50px" } }}>{item.title}</Typography>
-                  <Typography sx={{ fontSize: { xs: "20px", md: "25px", color: "gray" } }}>{item.exerpt}</Typography>
+                  <Typography sx={{ fontSize: { xs: "20px", md: "25px", color: "gray" } }}>{item.excerpt}</Typography>
                   <Box display={"flex"} gap={"10px"} marginTop={"20px"}>
-                    <Avatar src={item.author.image} alt={item.author.name} />
+                    <Avatar src={item.author.avatar.url} alt={item.author.name} />
                     <Box>
                       <Typography>{item.author.name}</Typography>
-                      <Box>{format(new Date(), "dd MMM, yyyy")} &bull; 5 min read</Box>
+                      <Box>{format(new Date(item.createdAt), "dd MMM, yyyy")} &bull; 5 min read</Box>
                     </Box>
                   </Box>
                 </Box>
@@ -57,24 +58,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-export const data = [
-  {
-    image: "https://media.graphassets.com/MxJZhmooRRuudoErkQ38",
-    title: "Technical SEO with Hygraph",
-    exerpt: "Get started with your SEO implementation when using a Headless CMS",
-    author: {
-      name: "Samar Badriddinov",
-      image: "https://media.graphassets.com/DkfNqQNGRz2F4UFntKQx",
-    },
-  },
-  {
-    image: "https://media.graphassets.com/bh3K2NNtTHCN260Xfq9h",
-    title: "Union Types and Sortable Relations with Hygraph",
-    exerpt: "Learn more about Polymorphic Relations and Sortable Relations with Hygraph",
-    author: {
-      name: "Samar Badriddinov",
-      image: "https://media.graphassets.com/DkfNqQNGRz2F4UFntKQx",
-    },
-  },
-];
