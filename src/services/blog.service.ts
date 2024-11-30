@@ -1,32 +1,37 @@
 import { request, gql } from "graphql-request";
+import { BlogsType } from "src/interfaces/blogs.inteface";
 
-const graphqlAPI = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT as string;
+const graphqlAPI = `https://us-west-2.cdn.hygraph.com/content/cm42qi27y01mv07w3ollvv1sx/master`;
 export const BlogsService = {
   async getAllBlogs() {
     const query = gql`
       query GetBlogs {
         blogs {
           title
-          exerpt
-          id
+          excerpt
           image {
             url
           }
+          slug
           author {
-            name
-            avatar {
-              url
+            ... on Author {
+              name
+              avatar {
+                url
+              }
             }
           }
           category {
-            label
-            slug
+            ... on Category {
+              label
+              slug
+            }
           }
         }
       }
     `;
 
-    const result = await request(graphqlAPI, query);
-    return result;
+    const result = await request<{ blogs: BlogsType[] }>(graphqlAPI, query);
+    return result.blogs;
   },
 };
