@@ -2,7 +2,8 @@ import { request, gql } from "graphql-request";
 import { BlogsType } from "src/interfaces/blogs.inteface";
 import { CategoriesType } from "src/interfaces/categories.interface";
 
-const graphqlAPI = `https://us-west-2.cdn.hygraph.com/content/cm42qi27y01mv07w3ollvv1sx/master`;
+const graphqlAPI = `${process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT}`;
+
 export const BlogsService = {
   async getAllBlogs() {
     const query = gql`
