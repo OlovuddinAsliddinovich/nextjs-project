@@ -38,7 +38,12 @@ const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
           <Box sx={{ display: "flex", flexDirection: "column", mt: "20px" }}>
             {categories.map((item) => (
               <Fragment key={item.slug}>
-                <Button sx={{ width: "100%", display: "flex", justifyContent: "flex-start", height: "50px" }}>{item.label}</Button>
+                <Button
+                  onClick={() => router.push(`/category/${item.slug}`)}
+                  sx={{ width: "100%", display: "flex", justifyContent: "flex-start", height: "50px" }}
+                >
+                  {item.label}
+                </Button>
                 <Divider sx={{ width: "100%", borderColor: "gray" }} />
               </Fragment>
             ))}
