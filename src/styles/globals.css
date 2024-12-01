@@ -16,3 +16,7 @@ body {
   background-color: #141414 !important;
   color: #ffffff !important;
 }
+
+#nprogress .bar {
+  z-index: 1110 !important;
+}
