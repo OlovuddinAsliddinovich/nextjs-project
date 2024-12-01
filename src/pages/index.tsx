@@ -7,7 +7,6 @@ import Layout from "src/layout/layout";
 import { BlogsService } from "src/services/blog.service";
 
 const IndexPage = ({ blogs, latestBlogs, categories }: HomePageProps) => {
-  console.log(latestBlogs);
   return (
     <Layout>
       <Hero blogs={blogs.slice(0, 3)} />

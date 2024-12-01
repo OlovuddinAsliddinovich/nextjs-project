@@ -4,8 +4,11 @@ import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { HeroProps } from "./hero.props";
+import { calculateEstimatedTimeToRead } from "src/helpers/time.format";
+import { useRouter } from "next/router";
 
 const Hero = ({ blogs }: HeroProps) => {
+  const router = useRouter();
   return (
     <Box width={"100%"} height={"70vh"} sx={{ backgroundColor: "#141414" }}>
       <Carousel
@@ -18,7 +21,7 @@ const Hero = ({ blogs }: HeroProps) => {
       >
         {blogs.map((item) => (
           <Box key={item.id}>
-            <Box sx={{ position: "relative", width: "100%", height: "70vh" }}>
+            <Box sx={{ position: "relative", width: "100%", height: "70vh", cursor: "pointer" }} onClick={() => router.push(`/blog/${item.slug}`)}>
               <Image src={item.image.url} alt={item.title} fill style={{ objectFit: "cover" }} priority={true} />
               <Box
                 sx={{
@@ -44,7 +47,9 @@ const Hero = ({ blogs }: HeroProps) => {
                     <Avatar src={item.author.avatar.url} alt={item.author.name} />
                     <Box>
                       <Typography>{item.author.name}</Typography>
-                      <Box>{format(new Date(item.createdAt), "dd MMM, yyyy")} &bull; 5 min read</Box>
+                      <Box>
+                        {format(new Date(item.createdAt), "dd MMM, yyyy")} &bull; {calculateEstimatedTimeToRead(item.description.text)} min read
+                      </Box>
                     </Box>
                   </Box>
                 </Box>

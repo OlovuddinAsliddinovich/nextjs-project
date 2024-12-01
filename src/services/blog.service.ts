@@ -30,6 +30,9 @@ export const BlogsService = {
               slug
             }
           }
+          description {
+            text
+          }
         }
       }
     `;
@@ -48,6 +51,9 @@ export const BlogsService = {
           id
           image {
             url
+          }
+          description {
+            text
           }
           createdAt
           author {
@@ -78,5 +84,43 @@ export const BlogsService = {
 
     const result = await request<{ categories: CategoriesType[] }>(graphqlAPI, query);
     return result.categories;
+  },
+
+  async getDetailedBlog(slug: string) {
+    const query = gql`
+      query GetDetailedBlog($slug: String!) {
+        blog(where: { slug: $slug }) {
+          title
+          excerpt
+          image {
+            url
+          }
+          id
+          slug
+          createdAt
+          author {
+            ... on Author {
+              name
+              avatar {
+                url
+              }
+            }
+          }
+          category {
+            ... on Category {
+              label
+              slug
+            }
+          }
+          description {
+            html
+            text
+          }
+        }
+      }
+    `;
+
+    const result = await request<{ blog: BlogsType }>(graphqlAPI, query, { slug });
+    return result.blog;
   },
 };

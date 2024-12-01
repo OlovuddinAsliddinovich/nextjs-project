@@ -4,12 +4,14 @@ import { navItem } from "src/config/constants";
 import CloseIcon from "@mui/icons-material/Close";
 import SchoolIcon from "@mui/icons-material/School";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface Props {
   window?: () => Window;
 }
 
 const Navbar = ({ window }: Props) => {
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
@@ -23,7 +25,8 @@ const Navbar = ({ window }: Props) => {
           alignItems={"center"}
           justifyContent={"center"}
           gap={1}
-          sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold" }}
+          sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold", cursor: "pointer" }}
+          onClick={() => router.push("/")}
         >
           <SchoolIcon sx={{ fontSize: "30px" }} /> Blog
         </Box>
@@ -57,7 +60,8 @@ const Navbar = ({ window }: Props) => {
               alignItems={"center"}
               justifyContent={"start"}
               gap={1}
-              sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold" }}
+              sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold", cursor: "pointer" }}
+              onClick={() => router.push("/")}
             >
               <SchoolIcon sx={{ fontSize: "30px" }} /> Blog
             </Box>

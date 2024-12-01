@@ -3,8 +3,10 @@ import { Fragment } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { SidebarProps } from "./sidebar.props";
+import { useRouter } from "next/router";
 
 const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
+  const router = useRouter();
   return (
     <Box width={{ xs: "100%", md: "30%" }}>
       <Box position={"sticky"} top={"100px"} sx={{ transition: "all 0.3s ease" }}>
@@ -13,7 +15,7 @@ const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
           <Box sx={{ display: "flex", flexDirection: "column", mt: "20px" }}>
             {latestBlogs.map((item) => (
               <Box key={item.id} marginTop={"20px"}>
-                <Box display={"flex"} gap={"20px"} alignItems={"center"}>
+                <Box onClick={() => router.push(`/blog/${item.slug}`)} display={"flex"} sx={{ cursor: "pointer" }} gap={"20px"} alignItems={"center"}>
                   <Image src={item.image.url} alt={item.title} width={100} height={100} style={{ objectFit: "cover", borderRadius: "8px" }} />
                   <Box display={"flex"} flexDirection={"column"} gap={"10px"}>
                     <Typography variant="body1">{item.title}</Typography>
@@ -21,7 +23,7 @@ const Sidebar = ({ latestBlogs, categories }: SidebarProps) => {
                       <Avatar src={item.author.avatar.url} alt={item.author.name} />
                       <Box>
                         <Typography variant="body2">{item.author.name}</Typography>
-                        <Box sx={{ opacity: ".6" }}>{format(new Date(item.createdAt), "dd MMM, yyyy")} &bull; 5 min read</Box>
+                        <Box sx={{ opacity: ".6" }}>{format(new Date(item.createdAt), "dd MMM, yyyy")}</Box>
                       </Box>
                     </Box>
                   </Box>
