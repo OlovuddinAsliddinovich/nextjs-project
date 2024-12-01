@@ -18,25 +18,25 @@ const Navbar = ({ window }: Props) => {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: "center" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingX: "20px" }}>
         <Box
           display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
           gap={1}
-          sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold", cursor: "pointer" }}
+          sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold", cursor: "pointer", fontFamily: "cursive" }}
           onClick={() => router.push("/")}
         >
           <SchoolIcon sx={{ fontSize: "30px" }} /> Blog
         </Box>
-        <CloseIcon />
+        <CloseIcon onClick={handleDrawerToggle} sx={{ cursor: "pointer" }} />
       </Box>
       <Divider />
       <List>
         {navItem.map((item) => (
           <ListItem key={item.route} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton sx={{ textAlign: "center" }} onClick={() => router.push(`/${item.route}`)}>
               <ListItemText primary={item.label} />
             </ListItemButton>
           </ListItem>
@@ -48,8 +48,8 @@ const Navbar = ({ window }: Props) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box height={"10vh"} sx={{ display: "flex" }}>
-      <AppBar sx={{ height: "10vh", backgroundColor: "#141414" }} component={"nav"}>
+    <Box sx={{ height: "9vh", display: "flex" }}>
+      <AppBar sx={{ backgroundColor: "#141414", height: "9vh" }} component={"nav"}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
             <MenuIcon />
@@ -60,7 +60,7 @@ const Navbar = ({ window }: Props) => {
               alignItems={"center"}
               justifyContent={"start"}
               gap={1}
-              sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold", cursor: "pointer" }}
+              sx={{ my: 2, fontSize: "20px", fontbold: "bold", fontWeight: "bold", cursor: "pointer", fontFamily: "cursive" }}
               onClick={() => router.push("/")}
             >
               <SchoolIcon sx={{ fontSize: "30px" }} /> Blog
