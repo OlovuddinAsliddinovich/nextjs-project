@@ -68,7 +68,7 @@ const Navbar = ({ window }: Props) => {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItem.map((item) => (
-              <Button key={item.route} sx={{ color: "#fff" }}>
+              <Button onClick={() => router.push(`/${item.route}`)} key={item.route} sx={{ color: "#fff" }}>
                 {item.label}
               </Button>
             ))}
